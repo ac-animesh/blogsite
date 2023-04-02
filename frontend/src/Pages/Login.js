@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
-import axios from "axios";
+import axios from "../utils/apis";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const Login = () => {
+  const { setAuth } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -29,22 +31,23 @@ const Login = () => {
         email,
         password,
       };
-      const result = await axios.post("/api/auth/login", payload);
-      console.log(result.data);
-
-      localStorage.setItem("token", JSON.stringify(result.data.accessToken));
-
+      const response = await axios.post("/api/auth/login", payload);
+      console.log(response);
+      const accessToken = response.data.accessToken;
+      setAuth({ accessToken });
       setFormData({
         email: "",
         password: "",
       });
-      toast.success(result.data.message, {
+      navigate("/");
+      toast.success(response.data.message, {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: true,
         theme: "dark",
       });
     } catch (error) {
+      console.log(error);
       toast.error(error.response.data.message, {
         position: "top-right",
         autoClose: 2000,
