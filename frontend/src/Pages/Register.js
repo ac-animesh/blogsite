@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import axios from "../utils/apis";
 import { toast } from "react-toastify";
