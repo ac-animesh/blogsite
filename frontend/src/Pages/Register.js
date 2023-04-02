@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import axios from "../utils/apis";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,8 @@ const Register = () => {
     password: "",
     confirm_password: "",
   });
+
+  const navigate = useNavigate();
 
   const { name, email, password, confirm_password } = formData;
 
@@ -63,10 +66,15 @@ const Register = () => {
     }
   };
 
+  const toLoginPage = (e) => {
+    e.preventDefault();
+    navigate("/login");
+  };
+
   return (
     <div className="p-8 bg-gray-900 flex flex-col justify-center items-center h-screen">
       <div className="">
-        <form className="w-96" autoComplete="off" onSubmit={onSubmitHandler}>
+        <form className="w-80" autoComplete="off" onSubmit={onSubmitHandler}>
           {/* heading */}
           <div className="mb-2 flex flex-row justify-center items-center">
             <PersonRoundedIcon
@@ -115,7 +123,7 @@ const Register = () => {
                 required
               />
             </div>
-            <div className="mb-4 flex flex-col">
+            <div className="mb-8 flex flex-col">
               <label className="text-white text-xl mb-1">
                 Confirm Password
               </label>
@@ -133,11 +141,23 @@ const Register = () => {
           {/* footer */}
           <div className="">
             <button
-              className="coursor-pointer text-white text-xl bg-green-600 hover:bg-green-400:border:bg-green-400 border border-green-600 px-4 py-1 rounded"
+              className="mb-4 w-full coursor-pointer text-white text-xl bg-green-600 border-2 border-green-600 px-4 py-1 rounded"
               type="submit"
             >
               Register
             </button>
+            <hr />
+            <div className="mt-2 text-center text-white">
+              <h3>
+                Already have an account?{" "}
+                <span
+                  className="cursor-pointer text-green-500 hover:underline"
+                  onClick={toLoginPage}
+                >
+                  Login
+                </span>
+              </h3>
+            </div>
           </div>
         </form>
       </div>

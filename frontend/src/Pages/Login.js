@@ -57,10 +57,15 @@ const Login = () => {
     }
   };
 
+  const toRegisterPage = (e) => {
+    e.preventDefault();
+    navigate("/register");
+  };
+
   return (
     <div className="p-8 bg-gray-900 flex flex-col justify-center items-center h-screen">
       <div className="">
-        <form className="w-96" autoComplete="off" onSubmit={onSubmitHandler}>
+        <form className="w-80" autoComplete="off" onSubmit={onSubmitHandler}>
           {/* heading */}
           <div className="mb-2 flex flex-row justify-center items-center">
             <PersonRoundedIcon
@@ -85,7 +90,7 @@ const Login = () => {
                 required
               />
             </div>
-            <div className="mb-4   flex flex-col">
+            <div className="mb-8 flex flex-col">
               <label className="text-white text-xl mb-1">Password</label>
               <input
                 className="p-2 rounded outline-none"
@@ -101,11 +106,23 @@ const Login = () => {
           {/* footer */}
           <div className="">
             <button
-              className="coursor-pointer text-white text-xl bg-green-600 hover:bg-green-400:border:bg-green-400 border border-green-600 px-4 py-1 rounded"
+              className="mb-4 w-full coursor-pointer text-white text-xl bg-green-600 border-2 border-green-600 px-4 py-1 rounded"
               type="submit"
             >
               Login
             </button>
+            <hr />
+            <div className="mt-2 text-center text-white">
+              <h3>
+                New here? {" "}
+                <span
+                  className="cursor-pointer text-green-500 hover:underline"
+                  onClick={toRegisterPage}
+                >
+                  Create an account
+                </span>
+              </h3>
+            </div>
           </div>
         </form>
       </div>
